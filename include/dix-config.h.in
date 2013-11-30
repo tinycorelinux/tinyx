@@ -1,0 +1,257 @@
+/* dix-config.h.in: not at all generated.                      -*- c -*- */
+
+#ifndef _DIX_CONFIG_H_
+#define _DIX_CONFIG_H_
+
+/* Builder address */
+#undef BUILDERADDR
+
+/* Operating System Name */
+#undef OSNAME
+
+/* Default font path */
+#undef COMPILEDDEFAULTFONTPATH
+
+/* Define to 1 if using `alloca.c'. */
+#undef C_ALLOCA
+
+/* Build DPMS extension */
+#undef DPMSExtension
+
+/* Support XDM-AUTH*-1 */
+#undef HASXDMAUTH
+
+/* Define to 1 if you have the `getdtablesize' function. */
+#undef HAS_GETDTABLESIZE
+
+/* Define to 1 if you have the `getifaddrs' function. */
+#undef HAS_GETIFADDRS
+
+/* Define to 1 if you have the `getpeereid' function. */
+#undef HAS_GETPEEREID
+
+/* Define to 1 if you have the `getpeerucred' function. */
+#undef HAS_GETPEERUCRED
+
+/* Define to 1 if you have the `mmap' function. */
+#undef HAS_MMAP
+
+/* Define to 1 if you have `alloca', as a function or macro. */
+#undef HAVE_ALLOCA
+
+/* Define to 1 if you have <alloca.h> and it should be used (not on Ultrix).
+   */
+#undef HAVE_ALLOCA_H
+
+/* Define to 1 if you have the <asm/mtrr.h> header file. */
+#undef HAVE_ASM_MTRR_H
+
+/* Define to 1 if you have the <dirent.h> header file, and it defines `DIR'. */
+#undef HAVE_DIRENT_H
+
+/* Define to 1 if you have the <dlfcn.h> header file. */
+#undef HAVE_DLFCN_H
+
+/* Define to 1 if you have the <fcntl.h> header file. */
+#undef HAVE_FCNTL_H
+
+/* Define to 1 if you have the `geteuid' function. */
+#undef HAVE_GETEUID
+
+/* Define to 1 if you have the `getopt' function. */
+#undef HAVE_GETOPT
+
+/* Define to 1 if you have the `getopt_long' function. */
+#undef HAVE_GETOPT_LONG
+
+/* Define to 1 if you have the `getuid' function. */
+#undef HAVE_GETUID
+
+/* Define to 1 if you have the <inttypes.h> header file. */
+#undef HAVE_INTTYPES_H
+
+/* Define to 1 if you have the `m' library (-lm). */
+#undef HAVE_LIBM
+
+/* Define to 1 if you have the `link' function. */
+#undef HAVE_LINK
+
+/* Define to 1 if you have the <linux/apm_bios.h> header file. */
+#undef HAVE_LINUX_APM_BIOS_H
+
+/* Define to 1 if you have the <linux/fb.h> header file. */
+#undef HAVE_LINUX_FB_H
+
+/* Define to 1 if you have the <linux/h3600_ts.h> header file. */
+#undef HAVE_LINUX_H3600_TS_H
+
+/* Define to 1 if you have the `memmove' function. */
+#undef HAVE_MEMMOVE
+
+/* Define to 1 if you have the <memory.h> header file. */
+#undef HAVE_MEMORY_H
+
+/* Define to 1 if you have the `memset' function. */
+#undef HAVE_MEMSET
+
+/* Define to 1 if you have the `mkstemp' function. */
+#undef HAVE_MKSTEMP
+
+/* Define to 1 if you have the <ndir.h> header file, and it defines `DIR'. */
+#undef HAVE_NDIR_H
+
+/* Define to 1 if you have the <stdint.h> header file. */
+#undef HAVE_STDINT_H
+
+/* Define to 1 if you have the <stdlib.h> header file. */
+#undef HAVE_STDLIB_H
+
+/* Define to 1 if you have the `strchr' function. */
+#undef HAVE_STRCHR
+
+/* Define to 1 if you have the <strings.h> header file. */
+#undef HAVE_STRINGS_H
+
+/* Define to 1 if you have the <string.h> header file. */
+#undef HAVE_STRING_H
+
+/* Define to 1 if you have the `strrchr' function. */
+#undef HAVE_STRRCHR
+
+/* Define to 1 if you have the `strtol' function. */
+#undef HAVE_STRTOL
+
+/* Define to 1 if SYSV IPC is available */
+#undef HAVE_SYSV_IPC
+
+/* Define to 1 if you have the <sys/agpio.h> header file. */
+#undef HAVE_SYS_AGPIO_H
+
+/* Define to 1 if you have the <sys/dir.h> header file, and it defines `DIR'.
+   */
+#undef HAVE_SYS_DIR_H
+
+/* Define to 1 if you have the <sys/io.h> header file. */
+#undef HAVE_SYS_IO_H
+
+/* Define to 1 if you have the <sys/ndir.h> header file, and it defines `DIR'.
+   */
+#undef HAVE_SYS_NDIR_H
+
+/* Define to 1 if you have the <sys/stat.h> header file. */
+#undef HAVE_SYS_STAT_H
+
+/* Define to 1 if you have the <sys/types.h> header file. */
+#undef HAVE_SYS_TYPES_H
+
+/* Define to 1 if you have the <sys/vm86.h> header file. */
+#undef HAVE_SYS_VM86_H
+
+/* Define to 1 if you have the <unistd.h> header file. */
+#undef HAVE_UNISTD_H
+
+/* Define to 1 if you have the `vprintf' function. */
+#undef HAVE_VPRINTF
+
+/* Support IPv6 for TCP connections */
+#undef IPv6
+
+/* Support os-specific local connections */
+#undef LOCALCONN
+
+/* Disable some debugging code */
+#undef NDEBUG
+
+/* Enable some debugging code */
+#undef DEBUG
+
+/* Name of package */
+#undef PACKAGE_STRING
+
+/* Overall prefix */
+#undef PROJECTROOT
+
+/* Support X resource extension */
+#undef RES
+
+/* Support MIT-SCREEN-SAVER extension */
+#undef SCREENSAVER
+
+/* Include time-based scheduler */
+#undef SMART_SCHEDULE
+
+/* If using the C implementation of alloca, define if you know the
+   direction of stack growth for your system; otherwise it will be
+   automatically deduced at run-time.
+	STACK_DIRECTION > 0 => grows toward higher addresses
+	STACK_DIRECTION < 0 => grows toward lower addresses
+	STACK_DIRECTION = 0 => direction of growth unknown */
+#undef STACK_DIRECTION
+
+/* Define to 1 if you have the ANSI C header files. */
+#undef STDC_HEADERS
+
+/* Support TCP socket connections */
+#undef TCPCONN
+
+/* Support UNIX socket connections */
+#undef UNIXCONN
+
+/* unaligned word accesses behave as expected */
+#undef WORKING_UNALIGNED_INT
+
+/* Support Xdmcp */
+#undef XDMCP
+
+/* Build XFree86 BigFont extension */
+#undef XF86BIGFONT
+
+/* Vendor release */
+#undef XORG_RELEASE
+
+/* Current Xorg version */
+#undef XORG_VERSION_CURRENT
+
+/* Xorg release date */
+#undef XORG_DATE
+
+/* Build XRes extension */
+#undef XResExtension
+
+/* Build DBE support */
+#undef DBE
+
+/* Vendor name */
+#undef XVENDORNAME
+
+/* Endian order */
+#undef X_BYTE_ORDER
+
+/* Enable GNU and other extensions to the C environment for GLIBC */
+#undef _GNU_SOURCE
+
+/* Define to empty if `const' does not conform to ANSI C. */
+#undef const
+
+/* Define to `int' if <sys/types.h> does not define. */
+#undef pid_t
+
+/* Define to 1 if unsigned long is 64 bits. */
+#undef _XSERVER64
+
+/* System is BSD-like */
+#undef CSRG_BASED
+
+/* Define to 1 if `struct sockaddr_in' has a `sin_len' member */
+#undef BSD44SOCKETS
+
+/* Have a monotonic clock from clock_gettime() */
+#undef MONOTONIC_CLOCK
+
+#if defined(__GNUC__) && !defined(_X_UNUSED)
+#define _X_UNUSED __attribute__((unused))
+#else
+#define _X_UNUSED
+#endif
+
+#endif /* _DIX_CONFIG_H_ */

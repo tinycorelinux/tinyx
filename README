@@ -1,0 +1,43 @@
+Necromancy
+==========
+
+We resurrected Xvesa from the depths of git history, and intend to maintain it with Xfbdev.
+
+This includes bugfixes, security fixes, and occasional new features if required.
+
+
+Why?
+----
+
+The TinyX servers fill our needs while being a lot smaller than Xorg can be made.
+
+
+Why 1.2.0 and not 1.3.0?
+------------------------
+
+As you know, Xvesa was killed in 1.4.0, so the latest released version would be 1.3.0.
+However, they broke all input in 1.3.0 (keyboard and mouse), so the last working released 
+version is 1.2.0.
+
+There were also some changes later on that we disagree with (mandatory xinput & xkb).
+
+
+Design choices
+--------------
+
+We aim for the smallest fully featured X server binary. Currently there are the vesa and 
+fbdev servers, but others may appear in the future (Xmodesetting?).
+
+- no xkb; it's bloat when console keymaps suffice
+- no xinput
+- no xinerama
+- no gl
+- TCP listening disabled by default, shadow FB enabled by default
+...
+
+
+Licensing
+---------
+
+While the original codebase is MIT, any changes here are GPLv3. Supporting closed devices
+with this code is not a goal.
