@@ -1172,7 +1172,6 @@ KdAddScreen(ScreenInfo * pScreenInfo,
 void KdInitOutput(ScreenInfo * pScreenInfo, int argc, char **argv)
 {
 	KdCardInfo *card;
-
 	KdScreenInfo *screen;
 
 	if (!kdCardInfo) {
@@ -1182,9 +1181,11 @@ void KdInitOutput(ScreenInfo * pScreenInfo, int argc, char **argv)
 		screen = KdScreenInfoAdd(card);
 		KdParseScreen(screen, 0);
 	}
+
 	/*
 	 * Initialize all of the screens for all of the cards
 	 */
+	int found = 0;
 	for (card = kdCardInfo; card; card = card->next) {
 		int ret = 1;
 
@@ -1194,8 +1195,11 @@ void KdInitOutput(ScreenInfo * pScreenInfo, int argc, char **argv)
 			for (screen = card->screenList; screen;
 			     screen = screen->next)
 				KdInitScreen(pScreenInfo, screen, argc, argv);
+			found = 1;
 		}
 	}
+
+	if (!found) return;
 
 	/*
 	 * Merge the various pixmap formats together, this can fail
