@@ -40,8 +40,6 @@ extern int kdMinScanCode;
 
 extern int kdMaxScanCode;
 
-extern const int kdKeymapWidth;
-
 extern KeySym kdKeymap[KD_MAX_LENGTH * KD_MAX_WIDTH];
 
 typedef struct {

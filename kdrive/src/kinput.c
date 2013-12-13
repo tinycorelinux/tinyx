@@ -68,7 +68,7 @@ int kdMaxScanCode;
 static int kdMinKeyCode;
 static int kdMaxKeyCode;
 
-const int kdKeymapWidth = KD_MAX_WIDTH;
+static const int kdKeymapWidth = KD_MAX_WIDTH;
 
 KeySym kdKeymap[KD_MAX_LENGTH * KD_MAX_WIDTH];
 
@@ -482,7 +482,7 @@ static void KdInitAutoRepeats(void)
 	}
 }
 
-const KdKeySymModsRec kdKeySymMods[] = {
+static const KdKeySymModsRec kdKeySymMods[] = {
 	{XK_Control_L, ControlMask},
 	{XK_Control_R, ControlMask},
 	{XK_Shift_L, ShiftMask},
