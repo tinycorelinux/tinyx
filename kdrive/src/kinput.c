@@ -1195,6 +1195,7 @@ static void KdCheckLock(void)
 void KdEnqueueKeyboardEvent(unsigned char scan_code, unsigned char is_up)
 {
 	unsigned char key_code;
+	static unsigned int locks = 0;
 
 	xEvent xE;
 
@@ -1218,18 +1219,19 @@ void KdEnqueueKeyboardEvent(unsigned char scan_code, unsigned char is_up)
 			xE.u.u.type = KeyPress;
 		xE.u.u.detail = key_code;
 
-		switch (KEYCOL1(key_code)) {
-		case XK_Num_Lock:
-		case XK_Scroll_Lock:
-		case XK_Shift_Lock:
-		case XK_Caps_Lock:
-			if (xE.u.u.type == KeyRelease)
-				return;
-			if (IsKeyDown(key_code))
-				xE.u.u.type = KeyRelease;
-			else
-				xE.u.u.type = KeyPress;
+		// Handle toggling keys
+		if (xE.u.u.type == KeyPress) {
+			switch (KEYCOL1(key_code)) {
+				case XK_Num_Lock:
+					locks ^= Mod2Mask;
+				break;
+				case XK_Shift_Lock:
+				case XK_Caps_Lock:
+					locks ^= LockMask;
+				break;
+			}
 		}
+		keyc->state |= locks;
 
 		/*
 		 * Check pressed keys which are already down
