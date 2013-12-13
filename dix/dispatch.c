@@ -3390,7 +3390,7 @@ ProcNoOperation(register ClientPtr client)
  *  then killed again, the client is really destroyed.
  *********************/
 
-char dispatchExceptionAtReset = DE_RESET;
+char dispatchExceptionAtReset = 0;
 
 void
 CloseDownClient(register ClientPtr client)
