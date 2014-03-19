@@ -791,7 +791,7 @@ miPutImage(pDraw, pGC, depth, x, y, w, h, leftPad, format, pImage)
 	DoChangeGC(pGC, GCForeground | GCBackground, gcv, 0);
 	bytesPer = (long)h * BitmapBytePad(w + leftPad);
 
-	for (i = 1 << (depth-1); i != 0; i >>= 1, pImage += bytesPer)
+	for (i = (unsigned long) 1 << (depth-1); i != 0; i >>= 1, pImage += bytesPer)
 	{
 	    if (i & oldPlanemask)
 	    {
