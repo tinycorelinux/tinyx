@@ -724,7 +724,7 @@ EventSwapPtr EventSwapVector[128] =
 };
 
 
-ReplySwapPtr ReplySwapVector[256] =
+const ReplySwapPtr ReplySwapVector[256] =
 {
     ReplyNotSwappd,
     ReplyNotSwappd,

@@ -188,7 +188,7 @@ int (* ProcVector[256]) (ClientPtr /*client*/);
 int (* SwappedProcVector[256]) (ClientPtr /*client*/);
 
 
-extern ReplySwapPtr ReplySwapVector[256];
+extern const ReplySwapPtr ReplySwapVector[256];
 
 int ProcBadRequest(ClientPtr /*client*/);
 
