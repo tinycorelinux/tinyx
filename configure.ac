@@ -637,6 +637,16 @@ AX_CHECK_COMPILE_FLAG([-fvisibility=hidden],
 	[ac_cv_visiblity_supported=no],
 	[])
 
+# Defeat .eh_frame bloat (gcc 4.6.3 x86-32 defconfig: 20% smaller busybox binary)
+AX_CHECK_COMPILE_FLAG([-fno-unwind-tables],
+	[CFLAGS="$CFLAGS -fno-unwind-tables"],
+	[],
+	[])
+AX_CHECK_COMPILE_FLAG([-fno-asynchronous-unwind-tables],
+	[CFLAGS="$CFLAGS -fno-asynchronous-unwind-tables"],
+	[],
+	[])
+
 AX_CHECK_LINK_FLAG([-Wl,-as-needed], [LDFLAGS="$LDFLAGS -Wl,-as-needed"],
 	[], [])
 
