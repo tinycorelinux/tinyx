@@ -195,7 +195,7 @@ static int SProcRenderCreateConicalGradient(ClientPtr pClient);
 
 static int SProcRenderDispatch(ClientPtr pClient);
 
-int (*ProcRenderVector[RenderNumberRequests]) (ClientPtr) = {
+static int (*ProcRenderVector[RenderNumberRequests]) (ClientPtr) = {
 ProcRenderQueryVersion,
         ProcRenderQueryPictFormats,
         ProcRenderQueryPictIndexValues,
@@ -233,7 +233,7 @@ ProcRenderQueryVersion,
         ProcRenderCreateLinearGradient,
         ProcRenderCreateRadialGradient, ProcRenderCreateConicalGradient};
 
-int (*SProcRenderVector[RenderNumberRequests]) (ClientPtr) = {
+static int (*SProcRenderVector[RenderNumberRequests]) (ClientPtr) = {
 SProcRenderQueryVersion,
         SProcRenderQueryPictFormats,
         SProcRenderQueryPictIndexValues,
