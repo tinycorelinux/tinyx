@@ -660,7 +660,8 @@ DefineSelf (int fd)
         if (!ifr->ifa_addr)
             continue;
 	len = sizeof(*(ifr->ifa_addr));
-	family = ConvertAddr(ifr->ifa_addr, &len, (pointer *)&addr);
+	family = ConvertAddr((struct sockaddr *) ifr->ifa_addr, &len,
+				(pointer *)&addr);
 	if (family == -1 || family == FamilyLocal)
 	    continue;
 #if defined(IPv6) && defined(AF_INET6)
@@ -823,7 +824,7 @@ AddLocalHosts (void)
 
 /* Reset access control list to initial hosts */
 void
-ResetHosts (char *display)
+ResetHosts (const char *display)
 {
     HOST	*host;
     char                lhostname[120], ohostname[120];
@@ -843,7 +844,7 @@ ResetHosts (char *display)
     }			saddr;
 #endif
     int			family = 0;
-    pointer		addr;
+    pointer		addr = NULL;
     int 		len;
 
     siTypesInitialize();
@@ -1356,7 +1357,7 @@ InvalidHost (
     ClientPtr			client)
 {
     int 			family;
-    pointer			addr;
+    pointer			addr = NULL;
     HOST 		*selfhost, *host;
 
     if (!AccessEnabled)   /* just let them in */
@@ -1636,7 +1637,7 @@ siHostnameAddrMatch(int family, pointer addr, int len,
 	struct addrinfo *addresses;
 	struct addrinfo *a;
 	int f, hostaddrlen;
-	pointer hostaddr;
+	pointer hostaddr = NULL;
 
 	if (siAddrLen >= sizeof(hostname))
 	    return FALSE;

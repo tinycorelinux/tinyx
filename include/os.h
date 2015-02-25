@@ -267,7 +267,7 @@ int ChangeAccessControl(ClientPtr /*client*/, int /*fEnabled*/);
 
 void AddLocalHosts(void);
 
-void ResetHosts(char *display);
+void ResetHosts(const char *display);
 
 void EnableLocalHost(void);
 
