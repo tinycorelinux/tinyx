@@ -67,6 +67,15 @@ SOFTWARE.
 #define MAX_BIG_REQUEST_SIZE 4194303
 #endif
 
+// Need to mark a set of functions so LTO doesn't mangle them
+#if defined(__GNUC__) && __GNUC__ >= 4
+#define XFONT_LTO __attribute__((noinline)) __attribute__((used))
+#define XFONT_LTO_VAR __attribute__((used))
+#else
+#define XFONT_LTO
+#define XFONT_LTO_VAR
+#endif
+
 typedef pointer	FID;
 typedef struct _FontPathRec *FontPathPtr;
 typedef struct _NewClientRec *NewClientPtr;
@@ -151,7 +160,7 @@ void MakeClientGrabPervious(ClientPtr /*client*/);
 
 void AvailableClientInput(ClientPtr /* client */);
 
-CARD32 GetTimeInMillis(void);
+CARD32 XFONT_LTO GetTimeInMillis(void);
 
 void AdjustWaitForDelay(
     pointer /*waitTime*/,
@@ -192,7 +201,7 @@ void UseMsg(void);
 
 void ProcessCommandLine(int /*argc*/, char* /*argv*/[]);
 
-int set_font_authorizations(
+XFONT_LTO int set_font_authorizations(
     char ** /* authorizations */,
     int * /*authlen */,
     pointer /* client */);
@@ -394,7 +403,7 @@ typedef enum {
 
 void AuditF(const char *f, ...) _printf_attribute(1,2);
 void VAuditF(const char *f, va_list args);
-void FatalError(const char *f, ...) _printf_attribute(1,2)
+void FatalError(const char *f, ...) _printf_attribute(1,2) XFONT_LTO
 #if defined(__GNUC__) && \
     ((__GNUC__ > 2) || ((__GNUC__ == 2) && (__GNUC_MINOR__ > 4)))
 __attribute((noreturn))
@@ -402,6 +411,6 @@ __attribute((noreturn))
 ;
 
 void VErrorF(const char *f, va_list args);
-void ErrorF(const char *f, ...) _printf_attribute(1,2);
+void ErrorF(const char *f, ...) _printf_attribute(1,2) XFONT_LTO;
 
 #endif /* OS_H */

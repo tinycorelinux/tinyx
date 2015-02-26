@@ -401,7 +401,7 @@ Bool ClientSleep(
 
 #ifndef ___CLIENTSIGNAL_DEFINED___
 #define ___CLIENTSIGNAL_DEFINED___
-Bool ClientSignal(
+Bool XFONT_LTO ClientSignal(
     ClientPtr /*client*/);
 #endif /* ___CLIENTSIGNAL_DEFINED___ */
 
@@ -413,15 +413,15 @@ Bool ClientIsAsleep(
 
 /* atom.c */
 
-Atom MakeAtom(
+XFONT_LTO Atom MakeAtom(
     char * /*string*/,
     unsigned /*len*/,
     Bool /*makeit*/);
 
-Bool ValidAtom(
+XFONT_LTO Bool ValidAtom(
     Atom /*atom*/);
 
-char *NameForAtom(
+XFONT_LTO char *NameForAtom(
     Atom /*atom*/);
 
 void AtomError(void);

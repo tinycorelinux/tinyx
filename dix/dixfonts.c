@@ -1864,14 +1864,14 @@ InitFonts()
     }
 }
 
-_X_EXPORT
+_X_EXPORT XFONT_LTO
 int
 GetDefaultPointSize()
 {
     return 120;
 }
 
-_X_EXPORT
+_X_EXPORT XFONT_LTO
 FontResolutionPtr
 GetClientResolutions(int *num)
 {
@@ -1911,7 +1911,7 @@ GetClientResolutions(int *num)
  * should be called (only once!) by each type of fpe when initialized
  */
 
-_X_EXPORT
+_X_EXPORT XFONT_LTO
 int
 RegisterFPEFunctions(NameCheckFunc name_func,
                      InitFpeFunc init_func,
@@ -1981,28 +1981,28 @@ find_old_font(XID id)
                                             SecurityUnknownAccess);
 }
 
-_X_EXPORT
+_X_EXPORT XFONT_LTO
 Font
 GetNewFontClientID()
 {
     return FakeClientID(0);
 }
 
-_X_EXPORT
+_X_EXPORT XFONT_LTO
 int
 StoreFontClientFont(FontPtr pfont, Font id)
 {
     return AddResource(id, RT_NONE, (pointer) pfont);
 }
 
-_X_EXPORT
+_X_EXPORT XFONT_LTO
 void
 DeleteFontClientID(Font id)
 {
     FreeResource(id, RT_NONE);
 }
 
-_X_EXPORT
+_X_EXPORT XFONT_LTO
 int
 client_auth_generation(ClientPtr client)
 {
@@ -2013,7 +2013,7 @@ static int fs_handlers_installed = 0;
 
 static unsigned int last_server_gen;
 
-_X_EXPORT
+_X_EXPORT XFONT_LTO
 int
 init_fs_handlers(FontPathElementPtr fpe, BlockHandlerProcPtr block_handler)
 {
@@ -2034,7 +2034,7 @@ init_fs_handlers(FontPathElementPtr fpe, BlockHandlerProcPtr block_handler)
     return Successful;
 }
 
-_X_EXPORT
+_X_EXPORT XFONT_LTO
 void
 remove_fs_handlers(FontPathElementPtr fpe, BlockHandlerProcPtr block_handler,
                    Bool all)

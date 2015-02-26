@@ -80,7 +80,7 @@ PtrCtrl defaultPointerControl = {
 };
 
 _X_EXPORT ClientPtr clients[MAXCLIENTS];
-_X_EXPORT ClientPtr serverClient;
+_X_EXPORT XFONT_LTO_VAR ClientPtr serverClient;
 _X_EXPORT int currentMaxClients;        /* current size of clients array */
 
 _X_EXPORT long maxBigRequestSize = MAX_BIG_REQUEST_SIZE;
@@ -89,7 +89,7 @@ _X_EXPORT WindowPtr WindowTable[MAXSCREENS];
 
 _X_EXPORT unsigned long globalSerialNumber = 0;
 
-_X_EXPORT unsigned long serverGeneration = 0;
+_X_EXPORT XFONT_LTO_VAR unsigned long serverGeneration = 0;
 
 /* these next four are initialized in main.c */
 _X_EXPORT CARD32 ScreenSaverTime;

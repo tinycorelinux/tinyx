@@ -122,7 +122,7 @@ void InitFonts(void);
 
 void FreeFonts(void);
 
-FontPtr find_old_font(XID /*id*/);
+FontPtr XFONT_LTO find_old_font(XID /*id*/);
 
 void GetGlyphs(FontPtr     /*font*/,
 		      unsigned long /*count*/,
