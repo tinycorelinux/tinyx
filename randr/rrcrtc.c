@@ -221,7 +221,6 @@ RRDeliverCrtcEvent(ClientPtr client, WindowPtr pWin, RRCrtcPtr crtc)
 
     ce.type = RRNotify + RREventBase;
     ce.subCode = RRNotify_CrtcChange;
-    ce.sequenceNumber = client->sequence;
     ce.timestamp = pScrPriv->lastSetTime.milliseconds;
     ce.window = pWin->drawable.id;
     ce.crtc = crtc->id;

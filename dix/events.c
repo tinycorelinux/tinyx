@@ -1038,8 +1038,6 @@ _X_EXPORT int
 TryClientEvents(ClientPtr client, xEvent *pEvents, int count, Mask mask,
                 Mask filter, GrabPtr grab)
 {
-    int i;
-
     int type;
 
 #ifdef DEBUG
@@ -1069,12 +1067,6 @@ TryClientEvents(ClientPtr client, xEvent *pEvents, int count, Mask mask,
             else {
                 pEvents->u.u.detail = NotifyNormal;
             }
-        }
-        type &= 0177;
-        if (type != KeymapNotify) {
-            /* all extension events must have a sequence number */
-            for (i = 0; i < count; i++)
-                pEvents[i].u.u.sequenceNumber = client->sequence;
         }
 
         if (BitIsOn(criticalEvents, type)) {
@@ -3414,6 +3406,9 @@ WriteEventsToClient(ClientPtr pClient, int count, xEvent *events)
     if (!pClient || pClient == serverClient || pClient->clientGone)
         return;
 
+    for (i = 0; i < count; i++)
+        if ((events[i].u.u.type & 0x7f) != KeymapNotify)
+            events[i].u.u.sequenceNumber = pClient->sequence;
 
     if (EventCallback) {
         EventInfoRec eventinfo;

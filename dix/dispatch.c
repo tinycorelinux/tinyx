@@ -3809,7 +3809,6 @@ SendErrorToClient(ClientPtr client, unsigned majorCode, unsigned minorCode,
     xError rep;
 
     rep.type = X_Error;
-    rep.sequenceNumber = client->sequence;
     rep.errorCode = errorCode;
     rep.majorCode = majorCode;
     rep.minorCode = minorCode;

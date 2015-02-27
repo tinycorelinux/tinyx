@@ -547,7 +547,6 @@ SyncAlarm *pAlarm;
 
     ane.type = SyncEventBase + XSyncAlarmNotify;
     ane.kind = XSyncAlarmNotify;
-    ane.sequenceNumber = pAlarm->client->sequence;
     ane.alarm = pAlarm->alarm_id;
     if (pTrigger->pCounter) {
         ane.counter_value_hi = XSyncValueHigh32(pTrigger->pCounter->value);
@@ -569,7 +568,6 @@ SyncAlarm *pAlarm;
     /* send to other interested clients */
     for (pcl = pAlarm->pEventClients; pcl; pcl = pcl->next) {
         if (!pAlarm->client->clientGone) {
-            ane.sequenceNumber = pcl->client->sequence;
             WriteEventsToClient(pcl->client, 1, (xEvent *) &ane);
         }
     }
@@ -602,7 +600,6 @@ int num_events;
 
         pev->type = SyncEventBase + XSyncCounterNotify;
         pev->kind = XSyncCounterNotify;
-        pev->sequenceNumber = client->sequence;
         pev->counter = pTrigger->pCounter->id;
         pev->wait_value_lo = XSyncValueLow32(pTrigger->test_value);
         pev->wait_value_hi = XSyncValueHigh32(pTrigger->test_value);
