@@ -3411,6 +3411,8 @@ WriteEventsToClient(ClientPtr pClient, int count, xEvent *events)
 
     int i;
 
+    if (!pClient || pClient == serverClient || pClient->clientGone)
+        return;
 
 
     if (EventCallback) {
