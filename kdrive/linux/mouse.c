@@ -424,15 +424,15 @@ static const unsigned char intelli_init[] = {
 
 #define NINIT_INTELLI	3
 
-static int ps2SkipInit(KdMouseInfo * mi, int ninit, Bool ret_next)
+static int ps2SkipInit(KdMouseInfo * const mi, int ninit, const Bool ret_next)
 {
-	Kmouse *km = mi->driver;
+	Kmouse * const km = mi->driver;
 	int c = -1;
 	Bool waiting;
 
 	waiting = FALSE;
 	while (ninit || ret_next) {
-		c = MouseReadByte(&km->iob, MOUSE_TIMEOUT);
+		c = MouseReadByte(&km->iob, 1); // Minimum timeout like in xf86-input-mouse
 		if (c == -1)
 			break;
 		/* look for ACK */
