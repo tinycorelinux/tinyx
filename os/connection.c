@@ -774,6 +774,36 @@ CheckConnections(void)
 }
 
 
+static void FreeOsBuffers(OsCommPtr oc) {
+	ConnectionInputPtr oci;
+	ConnectionOutputPtr oco;
+
+	if (AvailableInput == oc)
+		AvailableInput = (OsCommPtr)NULL;
+	if ((oci = oc->input)) {
+		if (FreeInputs) {
+			free(oci->buffer);
+			free(oci);
+		} else {
+			FreeInputs = oci;
+			oci->next = (ConnectionInputPtr)NULL;
+			oci->bufptr = oci->buffer;
+			oci->bufcnt = 0;
+			oci->lenLastReq = 0;
+		}
+	}
+	if ((oco = oc->output)) {
+		if (FreeOutputs) {
+			free(oco->buf);
+			free(oco);
+		} else {
+			FreeOutputs = oco;
+			oco->next = (ConnectionOutputPtr)NULL;
+			oco->count = 0;
+		}
+	}
+}
+
 /*****************
  * CloseDownConnection
  *    Delete client from AllClients and free resources
@@ -790,6 +820,7 @@ CloseDownConnection(ClientPtr client)
     XdmcpCloseDisplay(oc->fd);
 #endif
     CloseDownFileDescriptor(oc);
+    FreeOsBuffers(oc);
     client->osPrivate = (pointer)NULL;
     if (auditTrailLevel > 1)
 	AuditF("client %d disconnected\n", client->index);
