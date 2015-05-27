@@ -555,6 +555,7 @@ ProcGetWindowAttributes(register ClientPtr client)
                                             SecurityReadAccess);
     if (!pWin)
         return (BadWindow);
+    memset(&wa, 0, sizeof(xGetWindowAttributesReply));
     GetWindowAttributes(pWin, client, &wa);
     WriteReplyToClient(client, sizeof(xGetWindowAttributesReply), &wa);
     return (client->noClientException);
@@ -817,6 +818,7 @@ ProcGetGeometry(register ClientPtr client)
 
     int status;
 
+    memset(&rep, 0, sizeof(xGetGeometryReply));
     if ((status = GetGeometry(client, &rep)) != Success)
         return status;
 
@@ -842,6 +844,7 @@ ProcQueryTree(register ClientPtr client)
                                             SecurityReadAccess);
     if (!pWin)
         return (BadWindow);
+    memset(&reply, 0, sizeof(xQueryTreeReply));
     reply.type = X_Reply;
     reply.root = WindowTable[pWin->drawable.pScreen->myNum]->drawable.id;
     reply.sequenceNumber = client->sequence;
@@ -896,6 +899,7 @@ ProcInternAtom(register ClientPtr client)
     if (atom != BAD_RESOURCE) {
         xInternAtomReply reply = {0};
 
+        memset(&reply, 0, sizeof(xInternAtomReply));
         reply.type = X_Reply;
         reply.length = 0;
         reply.sequenceNumber = client->sequence;
@@ -921,6 +925,7 @@ ProcGetAtomName(register ClientPtr client)
     REQUEST_SIZE_MATCH(xResourceReq);
     if ((str = NameForAtom(stuff->id))) {
         len = strlen(str);
+        memset(&reply, 0, sizeof(xGetAtomNameReply));
         reply.type = X_Reply;
         reply.length = (len + 3) >> 2;
         reply.sequenceNumber = client->sequence;
@@ -1194,6 +1199,7 @@ ProcTranslateCoords(register ClientPtr client)
                                             SecurityReadAccess);
     if (!pDst)
         return (BadWindow);
+    memset(&rep, 0, sizeof(xTranslateCoordsReply));
     rep.type = X_Reply;
     rep.length = 0;
     rep.sequenceNumber = client->sequence;
@@ -1332,7 +1338,7 @@ ProcQueryFont(register ClientPtr client)
         rlength = sizeof(xQueryFontReply) +
             FONTINFONPROPS(FONTCHARSET(pFont)) * sizeof(xFontProp) +
             nprotoxcistructs * sizeof(xCharInfo);
-        reply = (xQueryFontReply *) ALLOCATE_LOCAL(rlength);
+        reply = (xQueryFontReply *) calloc(1, rlength);
         if (!reply) {
             return (BadAlloc);
         }
@@ -1343,7 +1349,7 @@ ProcQueryFont(register ClientPtr client)
         QueryFont(pFont, reply, nprotoxcistructs);
 
         WriteReplyToClient(client, rlength, reply);
-        DEALLOCATE_LOCAL(reply);
+        free(reply);
         return (client->noClientException);
     }
 }
@@ -2104,6 +2110,7 @@ DoGetImage(register ClientPtr client, int format, Drawable drawable,
         return (BadValue);
     }
     SECURITY_VERIFY_DRAWABLE(pDraw, drawable, client, SecurityReadAccess);
+    memset(&xgi, 0, sizeof(xGetImageReply));
     if (pDraw->type == DRAWABLE_WINDOW) {
         if (                    /* check for being viewable */
                !((WindowPtr) pDraw)->realized ||

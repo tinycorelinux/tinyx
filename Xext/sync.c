@@ -1319,6 +1319,7 @@ ClientPtr client;
 
     REQUEST_SIZE_MATCH(xSyncInitializeReq);
 
+    memset(&rep, 0, sizeof(xSyncInitializeReply));
     rep.type = X_Reply;
     rep.sequenceNumber = client->sequence;
     rep.majorVersion = SYNC_MAJOR_VERSION;

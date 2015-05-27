@@ -2879,6 +2879,7 @@ ProcQueryPointer(ClientPtr client)
         return BadWindow;
     if (mouse->valuator->motionHintWindow)
         MaybeStopHint(mouse, client);
+    memset(&rep, 0, sizeof(xQueryPointerReply));
     rep.type = X_Reply;
     rep.sequenceNumber = client->sequence;
     rep.mask = mouse->button->state | inputInfo.keyboard->key->state;

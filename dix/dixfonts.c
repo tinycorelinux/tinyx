@@ -782,6 +782,7 @@ doListFontsAndAliases(ClientPtr client, LFclosurePtr c)
     for (i = 0; i < nnames; i++)
         stringLens += (names->length[i] <= 255) ? names->length[i] : 0;
 
+    memset(&reply, 0, sizeof(xListFontsReply));
     reply.type = X_Reply;
     reply.length = (stringLens + nnames + 3) >> 2;
     reply.nFonts = nnames;
@@ -1028,6 +1029,7 @@ doListFontsWithInfo(ClientPtr client, LFWIclosurePtr c)
                     err = AllocError;
                     goto bail;
                 }
+                memset(reply + c->length, 0, length - c->length);
                 c->reply = reply;
                 c->length = length;
             }

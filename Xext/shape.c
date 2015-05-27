@@ -303,6 +303,7 @@ ClientPtr client;
     xShapeQueryVersionReply rep;
 
     REQUEST_SIZE_MATCH(xShapeQueryVersionReq);
+    memset(&rep, 0, sizeof(xShapeQueryVersionReply));
     rep.type = X_Reply;
     rep.length = 0;
     rep.sequenceNumber = client->sequence;
