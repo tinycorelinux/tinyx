@@ -1192,20 +1192,74 @@ static void KdCheckLock(void)
 	}
 }
 
+#define KEY_KP_0         /* 0           Insert    0x52  */   82
+#define KEY_KP_1         /* 1           End       0x4f  */   79
+#define KEY_KP_2         /* 2           Down      0x50  */   80
+#define KEY_KP_3         /* 3           PgDown    0x51  */   81
+#define KEY_KP_4         /* 4           Left      0x4b  */   75
+#define KEY_KP_5         /* 5                     0x4c  */   76
+#define KEY_KP_6         /* 6           Right     0x4d  */   77
+#define KEY_KP_7         /* 7           Home      0x47  */   71
+#define KEY_KP_8         /* 8           Up        0x48  */   72
+#define KEY_KP_9         /* 9           PgUp      0x49  */   73
+#define KEY_KP_Decimal   /* . (Decimal) Delete    0x53  */   83
+
+#define KEY_Insert       /* Insert                0x62  */   0x6e
+#define KEY_Delete       /* Delete                0x63  */   0x6f
+#define KEY_Home         /* Home                  0x59  */   0x66
+#define KEY_Up           /* Up                    0x5a  */   0x67
+#define KEY_PgUp         /* PgUp                  0x5b  */   0x68
+#define KEY_Left         /* Left                  0x5c  */   0x69
+#define KEY_Right        /* Right                 0x5e  */   0x6a
+#define KEY_End          /* End                   0x5f  */   0x6b
+#define KEY_Down         /* Down                  0x60  */   0x6c
+#define KEY_PgDown       /* PgDown                0x61  */   0x6d
+
+static unsigned char remap(const unsigned char scan) {
+	// The numpad buttons need to be remapped, as they have the same scan keys
+
+	switch (scan) {
+		case KEY_KP_0:
+			return KEY_Insert;
+		case KEY_KP_1:
+			return KEY_End;
+		case KEY_KP_2:
+			return KEY_Down;
+		case KEY_KP_3:
+			return KEY_PgDown;
+		case KEY_KP_4:
+			return KEY_Left;
+		case KEY_KP_6:
+			return KEY_Right;
+		case KEY_KP_7:
+			return KEY_Home;
+		case KEY_KP_8:
+			return KEY_Up;
+		case KEY_KP_9:
+			return KEY_PgUp;
+		case KEY_KP_Decimal:
+			return KEY_Delete;
+	}
+
+	return scan;
+}
+
 void KdEnqueueKeyboardEvent(unsigned char scan_code, unsigned char is_up)
 {
 	unsigned char key_code;
 	static unsigned int locks = 0;
 
 	xEvent xE;
-
 	KeyClassPtr keyc;
 
 	if (!pKdKeyboard)
 		return;
-	keyc = pKdKeyboard->key;
 
+	keyc = pKdKeyboard->key;
 	xE.u.keyButtonPointer.time = GetTimeInMillis();
+
+	if (!(locks & Mod2Mask))
+		scan_code = remap(scan_code);
 
 	if (kdMinScanCode <= scan_code && scan_code <= kdMaxScanCode) {
 		key_code = scan_code + KD_MIN_KEYCODE - kdMinScanCode;
