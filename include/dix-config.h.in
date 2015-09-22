@@ -121,12 +121,6 @@
 /* Define to 1 if you have the `strtol' function. */
 #undef HAVE_STRTOL
 
-/* Define to 1 if SYSV IPC is available */
-#undef HAVE_SYSV_IPC
-
-/* Define to 1 if you have the <sys/agpio.h> header file. */
-#undef HAVE_SYS_AGPIO_H
-
 /* Define to 1 if you have the <sys/dir.h> header file, and it defines `DIR'.
    */
 #undef HAVE_SYS_DIR_H

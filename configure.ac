@@ -117,30 +117,6 @@ if test "x$ac_cv_machine_mtrr_h" = xyes; then
 		support is available])
 fi
 
-dnl FreeBSD kldload support (sys/linker.h)
-AC_CHECK_HEADERS([sys/linker.h],
-	[ac_cv_sys_linker_h=yes],
-	[ac_cv_sys_linker_h=no],
-	[#include <sys/param.h>])
-AM_CONDITIONAL(FREEBSD_KLDLOAD, [test "x$ac_cv_sys_linker_h" = xyes])
-
-AC_CACHE_CHECK([for SYSV IPC],
-		ac_cv_sysv_ipc,
-		[AC_TRY_LINK([
-#include <sys/shm.h>
-],[
-{ 
-    int id;
-    id = shmget(IPC_PRIVATE, 512, SHM_W | SHM_R);
-    if (id < 0) return -1;
-    return shmctl(id, IPC_RMID, 0);
-}],
-	[ac_cv_sysv_ipc=yes],
-	[ac_cv_sysv_ipc=no])])
-if test "x$ac_cv_sysv_ipc" = xyes; then
-	AC_DEFINE(HAVE_SYSV_IPC, 1, [Define to 1 if SYSV IPC is available])
-fi
-
 dnl ---------------------------------------------------------------------------
 dnl Bus options and CPU capabilities.  Replaces logic in
 dnl hw/xfree86/os-support/bus/Makefile.am, among others.
@@ -204,7 +180,6 @@ AM_CONDITIONAL(I386_VIDEO, [test "x$I386_VIDEO" = xyes])
 AM_CONDITIONAL(PPC_VIDEO, [test "x$PPC_VIDEO" = xyes])
 AM_CONDITIONAL(SPARC64_VIDEO, [test "x$SPARC64_VIDEO" = xyes])
 
-DRI=no
 dnl it would be nice to autodetect these *CONS_SUPPORTs
 case $host_os in
   *freebsd*)
@@ -212,19 +187,12 @@ case $host_os in
 		kfreebsd*-gnu) ;;
 		*) AC_DEFINE(CSRG_BASED, 1, [System is BSD-like]) ;;
 	esac
-	AC_DEFINE(PCCONS_SUPPORT, 1, [System has PC console])
-	AC_DEFINE(PCVT_SUPPORT, 1, [System has PCVT console])
-	AC_DEFINE(SYSCONS_SUPPORT, 1, [System has syscons console])
 	;;
   *netbsd*)
 	AC_DEFINE(CSRG_BASED, 1, [System is BSD-like])
-	AC_DEFINE(PCCONS_SUPPORT, 1, [System has PC console])
-	AC_DEFINE(WSCONS_SUPPORT, 1, [System has wscons console])
 	;;
   *openbsd*)
 	AC_DEFINE(CSRG_BASED, 1, [System is BSD-like])
-	AC_DEFINE(PCVT_SUPPORT, 1, [System has PC console])
-	AC_DEFINE(WSCONS_SUPPORT, 1, [System has wscons console])
 	;;
 esac
 
@@ -238,7 +206,7 @@ VERSION_MAJOR=1
 VERSION_MINOR=0
 VERSION_PATCH=0
 VERSION_SNAP=0
-RELEASE_DATE="9 Nov 2013"
+RELEASE_DATE="22 Sep 2015"
 DEFAULT_VENDOR_WEB="http://tinycorelinux.com"
 
 m4_ifdef([AS_HELP_STRING], , [m4_define([AS_HELP_STRING], m4_defn([AC_HELP_STRING]))])
