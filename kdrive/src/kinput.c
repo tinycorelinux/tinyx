@@ -721,7 +721,7 @@ typedef enum _inputClass {
 	num_input_class
 } KdInputClass;
 
-typedef enum _inputAction {
+typedef enum __attribute__((packed)) _inputAction {
 	noop,
 	hold,
 	setto,
