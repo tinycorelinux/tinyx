@@ -37,3 +37,4 @@ err
 *rig
 *rej
 config.cache
+*.tar.*
