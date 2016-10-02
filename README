@@ -41,3 +41,9 @@ Licensing
 
 While the original codebase is MIT, any changes here are GPLv3. Supporting closed devices
 with this code is not a goal.
+
+Links
+-----
+
+There's a similar tinyX fork from the Puppy folks:
+https://github.com/idunham/tinyxserver
