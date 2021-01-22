@@ -34,6 +34,12 @@
 #include <X11/keysym.h>
 #include <linux/apm_bios.h>
 
+/* These symbols are not defined on musl */
+#if !defined(__uid_t) && !defined(__gid_t)
+#define __uid_t uid_t
+#define __gid_t gid_t
+#endif
+
 static int vtno;
 int LinuxConsoleFd;
 static int LinuxApmFd;
