@@ -527,6 +527,6 @@ extern ScreenInfo screenInfo;
 void InitOutput(
     ScreenInfo 	* /*pScreenInfo*/,
     int     	/*argc*/,
-    char    	** /*argv*/);
+    char    	** /*argv*/) XFONT_LTO;
 
 #endif /* SCREENINTSTRUCT_H */
