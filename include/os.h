@@ -90,7 +90,7 @@ typedef struct _NewClientRec *NewClientPtr;
 #define SIGVAL void
 #endif
 
-void (*OsVendorVErrorFProc)(const char *, va_list args);
+extern void (*OsVendorVErrorFProc)(const char *, va_list args);
 
 int WaitForSomething(
     int* /*pClientsReady*/
