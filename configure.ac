@@ -37,6 +37,7 @@ dnl kdrive-config.h covers the kdrive DDX
 AC_CONFIG_HEADERS(include/kdrive-config.h)
 
 AC_PROG_CC
+AM_PROG_AR
 AM_PROG_AS
 AC_PROG_INSTALL
 AC_PROG_LN_S
