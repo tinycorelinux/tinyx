@@ -1,3 +1,5 @@
+AUTOMAKE_OPTIONS = subdir-objects
+
 AM_CPPFLAGS = 					\
 	@KDRIVE_INCS@				\
 	@KDRIVE_CFLAGS@
