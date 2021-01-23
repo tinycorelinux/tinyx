@@ -3,6 +3,7 @@ Makefile.in
 .deps
 .libs
 .msg
+.dirstamp
 *.lo
 *.la
 *.a

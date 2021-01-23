@@ -18,7 +18,7 @@ libkdrive_a_SOURCES =	\
 	kmap.c		\
 	kmode.c		\
 	kshadow.c	\
-        $(top_srcdir)/mi/miinitext.c
+        ../../mi/miinitext.c
 
 libkdrivestubs_a_SOURCES = \
-        $(top_srcdir)/fb/fbcmap.c
+        ../../fb/fbcmap.c
