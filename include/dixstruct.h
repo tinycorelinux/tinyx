@@ -181,11 +181,11 @@ typedef struct _CallbackList {
 
 /* proc vectors */
 
-int (* InitialVector[3]) (ClientPtr /*client*/);
+extern int (* InitialVector[3]) (ClientPtr /*client*/);
 
-int (* ProcVector[256]) (ClientPtr /*client*/);
+extern int (* ProcVector[256]) (ClientPtr /*client*/);
 
-int (* SwappedProcVector[256]) (ClientPtr /*client*/);
+extern int (* SwappedProcVector[256]) (ClientPtr /*client*/);
 
 
 extern const ReplySwapPtr ReplySwapVector[256];

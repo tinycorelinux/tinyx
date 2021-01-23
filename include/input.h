@@ -328,6 +328,6 @@ void ProcessInputEvents(void);
 
 void InitInput(
     int  /*argc*/,
-    char ** /*argv*/);
+    char ** /*argv*/) XFONT_LTO;
 
 #endif /* INPUT_H */

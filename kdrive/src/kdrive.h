@@ -414,6 +414,6 @@ KdShadowSet(ScreenPtr pScreen, int randr, ShadowUpdateProc update,
 void KdShadowUnset(ScreenPtr pScreen);
 
 /* function prototypes to be implemented by the drivers */
-void InitCard(char *name);
+void InitCard(char *name) XFONT_LTO;
 
 #endif				/* _KDRIVE_H_ */

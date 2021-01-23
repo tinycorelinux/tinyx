@@ -90,7 +90,7 @@ typedef struct _NewClientRec *NewClientPtr;
 #define SIGVAL void
 #endif
 
-void (*OsVendorVErrorFProc)(const char *, va_list args);
+extern void (*OsVendorVErrorFProc)(const char *, va_list args);
 
 int WaitForSomething(
     int* /*pClientsReady*/
@@ -231,7 +231,7 @@ void OsCleanup(Bool);
 
 void OsVendorFatalError(void);
 
-void OsVendorInit(void);
+void OsVendorInit(void) XFONT_LTO;
 
 void OsBlockSignals (void);
 
@@ -320,9 +320,9 @@ XID GenerateAuthorization(
     char	** /* data_return */);
 
 
-int ddxProcessArgument(int /*argc*/, char * /*argv*/ [], int /*i*/);
+XFONT_LTO int ddxProcessArgument(int /*argc*/, char * /*argv*/ [], int /*i*/);
 
-void ddxUseMsg(void);
+void ddxUseMsg(void) XFONT_LTO;
 
 /* int ReqLen(xReq *req, ClientPtr client)
  * Given a pointer to a *complete* request, return its length in bytes.
