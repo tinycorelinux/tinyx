@@ -47,3 +47,6 @@ Links
 
 There's a similar tinyX fork from the Puppy folks:
 https://github.com/idunham/tinyxserver
+
+In case you can't find the sources for libXfont ver 1 or other libs:
+https://www.x.org/archive/individual/lib/
