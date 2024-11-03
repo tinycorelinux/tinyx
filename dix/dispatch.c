@@ -1388,7 +1388,7 @@ ProcQueryTextExtents(register ClientPtr client)
             return (BadLength);
         length--;
     }
-    if (!QueryTextExtents(pFont, length, (unsigned char *) &stuff[1], &info))
+    if (!xfont2_query_text_extents(pFont, length, (unsigned char *) &stuff[1], &info))
         return (BadAlloc);
     reply.type = X_Reply;
     reply.length = 0;
