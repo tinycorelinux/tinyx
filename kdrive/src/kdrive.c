@@ -511,7 +511,7 @@ void KdParseMouse(const char *arg)
 		}
 	}
 
-	if (!delim != ',')
+	if (delim != ',')
 		return;
 
 	arg = KdParseFindNext(arg, ",", save, &delim);
