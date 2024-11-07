@@ -1289,7 +1289,7 @@ damageDamageChars(DrawablePtr pDrawable,
 
     BoxRec box;
 
-    QueryGlyphExtents(font, charinfo, n, &extents);
+    xfont2_query_glyph_extents(font, charinfo, n, &extents);
     if (imageblt) {
         if (extents.overallWidth > extents.overallRight)
             extents.overallRight = extents.overallWidth;

@@ -28,13 +28,14 @@ SOFTWARE.
 #include <X11/fonts/font.h>
 #include "closure.h"
 #include <X11/fonts/fontstruct.h>
+#include <X11/fonts/libxfont2.h>
 
 #define NullDIXFontProp ((DIXFontPropPtr)0)
 
 typedef struct _DIXFontProp *DIXFontPropPtr;
-
-extern FPEFunctions *fpe_functions;
-
+#if 0
+static xfont2_fpe_funcs_rec const **fpe_functions;
+#endif
 int FontToXError(int /*err*/);
 
 Bool SetDefaultFont(char * /*defaultfontname*/);
