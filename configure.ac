@@ -259,7 +259,9 @@ AC_ARG_ENABLE(xf86bigfont,    AS_HELP_STRING([--disable-xf86bigfont], [Build XF8
 AC_ARG_ENABLE(dpms,           AS_HELP_STRING([--disable-dpms], [Build DPMS extension (default: enabled)]), [DPMSExtension=$enableval], [DPMSExtension=yes])
 
 dnl kdrive and its subsystems
-AC_ARG_ENABLE(kdrive,         AS_HELP_STRING([--enable-kdrive], [Build kdrive servers (default: yes)]), [KDRIVE=$enableval], [KDRIVE=yes])
+AC_ARG_ENABLE(kdrive,         AS_HELP_STRING([--enable-kdrive],  [Build kdrive servers (default: yes)]), [KDRIVE=$enableval], [KDRIVE=yes])
+AC_ARG_ENABLE(xvesa,          AS_HELP_STRING([--disable-xvesa],  [Build Xvesa server (default: yes)]), [XVESA=$enableval], [XVESA=yes])
+AC_ARG_ENABLE(xfbdev,         AS_HELP_STRING([--disable-xfbdev], [Build Xfbdev server (default: yes)]), [XFBDEV=$enableval], [XFBDEV=yes])
 
 
 dnl chown/chmod to be setuid root as part of build
@@ -535,12 +537,16 @@ if test "$KDRIVE" = yes; then
 
     AC_CHECK_HEADERS([asm/vm86.h sys/io.h])
     if test "$ac_cv_header_asm_vm86_h" = yes; then
-        AC_DEFINE(KDRIVEVESA, 1, [Build VESA-based kdrive servers])
+        if test "x$XVESA" != "xno"; then
+            AC_DEFINE(KDRIVEVESA, 1, [Build VESA-based kdrive servers])
+        fi
     fi
 
     AC_CHECK_HEADERS([linux/fb.h])
     if test "$ac_cv_header_linux_fb_h" = yes; then
-        AC_DEFINE(KDRIVEFBDEV, 1, [Build fbdev-based kdrive server])
+        if test "x$XFBDEV" != "xno"; then
+            AC_DEFINE(KDRIVEFBDEV, 1, [Build fbdev-based kdrive server])
+        fi
     fi
     
     # damage shadow extension fb mi
@@ -571,8 +577,15 @@ AC_SUBST(KDRIVE_CFLAGS)
 AC_SUBST(KDRIVE_PURE_LIBS)
 AC_SUBST(KDRIVE_LIBS)
 AM_CONDITIONAL(KDRIVELINUX, [test "x$KDRIVELINUX" = xyes])
-AM_CONDITIONAL(KDRIVEVESA, [test x"$ac_cv_header_asm_vm86_h" = xyes])
+AM_CONDITIONAL(KDRIVEVESA,  [test x"$ac_cv_header_asm_vm86_h" = xyes])
+if test "x$XVESA" = "xno"; then
+    AM_CONDITIONAL(KDRIVEVESA, 0)
+fi
 AM_CONDITIONAL(KDRIVEFBDEV, [test x"$ac_cv_header_linux_fb_h" = xyes])
+if test "x$XFBDEV" = "xno"; then
+    AM_CONDITIONAL(KDRIVEFBDEV, 0)
+fi
+
 
 dnl and the rest of these are generic, so they're in config.h
 AC_DEFINE(XResExtension, 1, [Build XRes extension])
