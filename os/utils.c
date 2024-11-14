@@ -617,7 +617,11 @@ ProcessCommandLine(int argc, char *argv[])
 #endif
 	else if ( strcmp( argv[i], "-deferglyphs") == 0)
 	{
+#ifdef XFONT2
+	    if(++i >= argc || !xfont2_parse_glyph_caching_mode(argv[i]))
+#else
 	    if(++i >= argc || !ParseGlyphCachingMode(argv[i]))
+#endif
 		UseMsg();
 	}
 	else if ( strcmp( argv[i], "-f") == 0)
