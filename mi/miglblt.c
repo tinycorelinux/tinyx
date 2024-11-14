@@ -209,7 +209,11 @@ miImageGlyphBlt(pDrawable, pGC, x, y, nglyph, ppci, pglyphBase)
     unsigned long	oldFG;
     xRectangle backrect;
 
+#ifdef XFONT2
+    xfont2_query_glyph_extents(pGC->font, ppci, (unsigned long)nglyph, &info);
+#else
     QueryGlyphExtents(pGC->font, ppci, (unsigned long)nglyph, &info);
+#endif
 
     if (info.overallWidth >= 0)
     {

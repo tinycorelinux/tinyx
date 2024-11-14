@@ -21,6 +21,9 @@
 /* Support XDM-AUTH*-1 */
 #undef HASXDMAUTH
 
+/* Use libXfont2 */
+#undef XFONT2
+
 /* Define to 1 if you have the `getdtablesize' function. */
 #undef HAS_GETDTABLESIZE
 

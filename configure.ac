@@ -248,6 +248,9 @@ DEFAULT_FONT_PATH="${FONTDIR}/misc/,${FONTDIR}/100dpi/,${FONTDIR}/75dpi/"
 AC_ARG_WITH(default-font-path, AS_HELP_STRING([--with-default-font-path=PATH], [Comma separated list of font dirs]),
 				[ FONTPATH="$withval" ],
 				[ FONTPATH="${DEFAULT_FONT_PATH}" ])
+AC_ARG_ENABLE(libXfont2,       AS_HELP_STRING([--enable-libXfont2],
+				  [Build with libXfont2 (default: disabled)]),
+				[XFONT2=$enableval], [XFONT2=no])
 
 dnl Extensions.
 AC_ARG_ENABLE(xres,           AS_HELP_STRING([--disable-xres], [Build XRes extension (default: enabled)]), [RES=$enableval], [RES=yes])
@@ -319,9 +322,18 @@ XEXT_INC='-I$(top_srcdir)/Xext'
 XEXT_LIB='$(top_builddir)/Xext/libXext.la'
 XEXTXORG_LIB='$(top_builddir)/Xext/libXextbuiltin.la'
 
+AM_CONDITIONAL(DEBUG, test "x$DEBUGGING" = xyes)
+
+if test "x$XFONT2" = xyes; then
+	AC_DEFINE(XFONT2, 1, [Build with libXfont2])
+	XFONT_LIB="xfont2"
+else
+	XFONT_LIB="xfont"
+fi
+
 dnl Core modules for most extensions, et al.
 REQUIRED_MODULES="[randrproto >= 1.2] renderproto [fixesproto >= 4.0] [damageproto >= 1.1] xcmiscproto xextproto xproto xtrans xf86bigfontproto [scrnsaverproto >= 1.1] bigreqsproto resourceproto fontsproto inputproto [kbproto >= 1.0.3]"
-REQUIRED_LIBS="xfont fontenc"
+REQUIRED_LIBS="$XFONT_LIB fontenc"
 
 AM_CONDITIONAL(SCREENSAVER, [test "x$SCREENSAVER" = xyes])
 if test "x$SCREENSAVER" = xyes; then

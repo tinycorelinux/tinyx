@@ -179,7 +179,11 @@ XFree86BigfontExtensionInit()
             + (unsigned int) (65536.0 / (RAND_MAX + 1.0) * rand());
         /* fprintf(stderr, "signature = 0x%08X\n", signature); */
 
+#ifdef XFONT2
+        FontShmdescIndex = xfont2_allocate_font_private_index();
+#else
         FontShmdescIndex = AllocateFontPrivateIndex();
+#endif
 
 #if !defined(CSRG_BASED) && !defined(__CYGWIN__)
         pagesize = SHMLBA;
@@ -511,7 +515,11 @@ ProcXF86BigfontQueryFont(ClientPtr client)
             }
             if (pDesc && !badSysCall) {
                 *(CARD32 *) (pCI + nCharInfos) = signature;
+#ifdef XFONT2
+                if (!xfont2_font_set_private(pFont, FontShmdescIndex, pDesc)) {
+#else
                 if (!FontSetPrivate(pFont, FontShmdescIndex, pDesc)) {
+#endif
                     shmdealloc(pDesc);
                     return BadAlloc;
                 }
