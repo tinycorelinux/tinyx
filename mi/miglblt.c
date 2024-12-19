@@ -61,7 +61,8 @@ SOFTWARE.
 #include	"scrnintstr.h"
 #include	"pixmap.h"
 #include	"servermd.h"
-#include        "mi.h"
+#include	"mi.h"
+#include	"xfont2_compat.h"
 
 /*
     machine-independent glyph blt.

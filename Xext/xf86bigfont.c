@@ -64,6 +64,7 @@
 #include "gcstruct.h"
 #include "dixfontstr.h"
 #include "extnsionst.h"
+#include "xfont2_compat.h"
 
 #define _XF86BIGFONT_SERVER_
 #include <X11/extensions/xf86bigfproto.h>
@@ -511,7 +512,11 @@ ProcXF86BigfontQueryFont(ClientPtr client)
             }
             if (pDesc && !badSysCall) {
                 *(CARD32 *) (pCI + nCharInfos) = signature;
+#ifdef XFONT2
+                if (!xfont2_font_set_private(pFont, FontShmdescIndex, pDesc)) {
+#else
                 if (!FontSetPrivate(pFont, FontShmdescIndex, pDesc)) {
+#endif
                     shmdealloc(pDesc);
                     return BadAlloc;
                 }
