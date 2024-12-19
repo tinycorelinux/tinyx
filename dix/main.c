@@ -98,6 +98,7 @@ Equipment Corporation.
 #include "dixfont.h"
 #include "extnsionst.h"
 #include "dixevents.h"          /* InitEvents() */
+#include "xfont2_compat.h"
 
 #ifdef DPMSExtension
 #define DPMS_SERVER
@@ -292,11 +293,7 @@ main(int argc, char *argv[], char *envp[])
 
         InitAtoms();
         InitEvents();
-#ifdef XFONT2
-        xfont2_init_glyph_caching();
-#else
         InitGlyphCaching();
-#endif
         ResetExtensionPrivates();
         ResetClientPrivates();
         ResetScreenPrivates();
