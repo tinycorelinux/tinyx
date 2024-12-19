@@ -28,17 +28,18 @@ SOFTWARE.
 #include <X11/fonts/font.h>
 #include "closure.h"
 #include <X11/fonts/fontstruct.h>
-#ifdef XFONT2
-#include <X11/fonts/libxfont2.h>
-#endif
+#include "xfont2_compat.h"
 
 #define NullDIXFontProp ((DIXFontPropPtr)0)
 
 typedef struct _DIXFontProp *DIXFontPropPtr;
 
-#ifndef XFONT2
-extern FPEFunctions *fpe_functions;
+#ifdef XFONT2
+extern xfont2_fpe_funcs_rec const **fpe_functions;
+#else
+extern FPEFunctions **fpe_functions;
 #endif
+
 
 int FontToXError(int /*err*/);
 

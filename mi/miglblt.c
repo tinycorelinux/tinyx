@@ -61,7 +61,8 @@ SOFTWARE.
 #include	"scrnintstr.h"
 #include	"pixmap.h"
 #include	"servermd.h"
-#include        "mi.h"
+#include	"mi.h"
+#include	"xfont2_compat.h"
 
 /*
     machine-independent glyph blt.
@@ -209,11 +210,7 @@ miImageGlyphBlt(pDrawable, pGC, x, y, nglyph, ppci, pglyphBase)
     unsigned long	oldFG;
     xRectangle backrect;
 
-#ifdef XFONT2
-    xfont2_query_glyph_extents(pGC->font, ppci, (unsigned long)nglyph, &info);
-#else
     QueryGlyphExtents(pGC->font, ppci, (unsigned long)nglyph, &info);
-#endif
 
     if (info.overallWidth >= 0)
     {
