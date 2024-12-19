@@ -64,7 +64,6 @@
 #include "gcstruct.h"
 #include "dixfontstr.h"
 #include "extnsionst.h"
-#include "xfont2_compat.h"
 
 #define _XF86BIGFONT_SERVER_
 #include <X11/extensions/xf86bigfproto.h>
@@ -180,7 +179,11 @@ XFree86BigfontExtensionInit()
             + (unsigned int) (65536.0 / (RAND_MAX + 1.0) * rand());
         /* fprintf(stderr, "signature = 0x%08X\n", signature); */
 
+#ifdef XFONT2
+        FontShmdescIndex = xfont2_allocate_font_private_index();
+#else
         FontShmdescIndex = AllocateFontPrivateIndex();
+#endif
 
 #if !defined(CSRG_BASED) && !defined(__CYGWIN__)
         pagesize = SHMLBA;

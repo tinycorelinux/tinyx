@@ -101,7 +101,6 @@ OR PERFORMANCE OF THIS SOFTWARE.
 
 #include "picture.h"
 
-#include "xfont2_compat.h"
 
 _X_EXPORT Bool noTestExtensions;
 _X_EXPORT Bool noBigReqExtension = FALSE;
@@ -618,7 +617,11 @@ ProcessCommandLine(int argc, char *argv[])
 #endif
 	else if ( strcmp( argv[i], "-deferglyphs") == 0)
 	{
+#ifdef XFONT2
+	    if(++i >= argc || !xfont2_parse_glyph_caching_mode(argv[i]))
+#else
 	    if(++i >= argc || !ParseGlyphCachingMode(argv[i]))
+#endif
 		UseMsg();
 	}
 	else if ( strcmp( argv[i], "-f") == 0)
