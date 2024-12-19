@@ -94,6 +94,7 @@ Equipment Corporation.
 #include "dispatch.h"
 #include "swaprep.h"
 #include "swapreq.h"
+#include "xfont2_compat.h"
 
 #define mskcnt ((MAXCLIENTS + 31) / 32)
 #define BITMASK(i) (1U << ((i) & 31))

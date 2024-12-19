@@ -300,7 +300,9 @@ main(int argc, char *argv[], char *envp[])
         ResetGCPrivates();
         ResetPixmapPrivates();
         ResetColormapPrivates();
+#ifndef XFONT2
         ResetFontPrivateIndex();
+#endif
         ResetDevicePrivateIndex();
         InitCallbackManager();
         InitVisualWrap();

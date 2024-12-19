@@ -39,6 +39,7 @@
 #include    "gcstruct.h"
 #include    "damage.h"
 #include    "damagestr.h"
+#include    "xfont2_compat.h"
 
 #define wrap(priv, real, mem, func) {\
     priv->mem = real->mem; \
