@@ -9,4 +9,4 @@ EXTRA_DIST = do-not-use-config.h dix-config.h \
 	misc.h miscstruct.h opaque.h os.h pixmap.h \
 	pixmapstr.h property.h propertyst.h region.h regionstr.h resource.h \
 	screenint.h scrnintstr.h selection.h servermd.h site.h \
-	swaprep.h swapreq.h validate.h window.h windowstr.h xfont2_compat
+	swaprep.h swapreq.h validate.h window.h windowstr.h xfont2_compat.h

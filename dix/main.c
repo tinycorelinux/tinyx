@@ -98,7 +98,6 @@ Equipment Corporation.
 #include "dixfont.h"
 #include "extnsionst.h"
 #include "dixevents.h"          /* InitEvents() */
-#include "xfont2_compat.h"
 
 #ifdef DPMSExtension
 #define DPMS_SERVER
