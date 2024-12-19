@@ -101,6 +101,7 @@ OR PERFORMANCE OF THIS SOFTWARE.
 
 #include "picture.h"
 
+#include "xfont2_compat.h"
 
 _X_EXPORT Bool noTestExtensions;
 _X_EXPORT Bool noBigReqExtension = FALSE;
