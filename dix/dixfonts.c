@@ -2225,15 +2225,19 @@ adjust_fs_wait_for_delay(void *wt, unsigned long newdelay)
 {
     AdjustWaitForDelay(wt, newdelay);
 }
+
+static void
+fs_block_handler(void *blockData, OSTimePtr timeout, void *readmask)
+{
+    FontBlockHandlerProcPtr block_handler = blockData;
+
+    (*block_handler)(timeout);
+}
 #endif
 
 _X_EXPORT XFONT_LTO
 int
-#ifdef XFONT2
-_init_fs_handlers(FontPathElementPtr fpe, FontBlockHandlerProcPtr block_handler)
-#else
 init_fs_handlers(FontPathElementPtr fpe, BlockHandlerProcPtr block_handler)
-#endif
 {
     /* if server has reset, make sure the b&w handlers are reinstalled */
     if (last_server_gen < serverGeneration) {
@@ -2243,8 +2247,8 @@ init_fs_handlers(FontPathElementPtr fpe, BlockHandlerProcPtr block_handler)
     if (fs_handlers_installed == 0) {
 
 #ifdef XFONT2
-        if (!RegisterBlockAndWakeupHandlers((BlockHandlerProcPtr)block_handler,
-                                            FontWakeup, (pointer) 0))
+        if (!RegisterBlockAndWakeupHandlers(fs_block_handler,
+                                            FontWakeup, (pointer) block_handler))
 #else
         if (!RegisterBlockAndWakeupHandlers(block_handler,
                                             FontWakeup, (pointer) 0))
@@ -2258,21 +2262,16 @@ init_fs_handlers(FontPathElementPtr fpe, BlockHandlerProcPtr block_handler)
 
 _X_EXPORT XFONT_LTO
 void
-#ifdef XFONT2
-_remove_fs_handlers(FontPathElementPtr fpe, FontBlockHandlerProcPtr block_handler,
-                    Bool all)
-#else
 remove_fs_handlers(FontPathElementPtr fpe, BlockHandlerProcPtr block_handler,
                    Bool all)
-#endif
 {
     if (all) {
         /* remove the handlers if no one else is using them */
         if (--fs_handlers_installed == 0) {
 
 #ifdef XFONT2
-            RemoveBlockAndWakeupHandlers((BlockHandlerProcPtr)block_handler, FontWakeup,
-                                         (pointer) 0);
+            RemoveBlockAndWakeupHandlers(fs_block_handler, FontWakeup,
+                                         (pointer) block_handler);
 #else
             RemoveBlockAndWakeupHandlers(block_handler, FontWakeup,
                                          (pointer) 0);
@@ -2341,9 +2340,9 @@ static const xfont2_client_funcs_rec xfont2_client_funcs = {
     .get_default_point_size = get_default_point_size,
     .get_new_font_client_id = get_new_font_client_id,
     .get_time_in_millis = wrap_time_in_millis,
-    .init_fs_handlers = _init_fs_handlers,
+    .init_fs_handlers = (int (*)(FontPathElementPtr, FontBlockHandlerProcPtr))init_fs_handlers,
     .register_fpe_funcs = register_fpe_funcs,
-    .remove_fs_handlers = _remove_fs_handlers,
+    .remove_fs_handlers = (void (*)(FontPathElementPtr, FontBlockHandlerProcPtr, Bool))remove_fs_handlers,
     .get_server_client = get_server_client,
     .set_font_authorizations = set_font_authorizations,
     .store_font_client_font = store_font_Client_font,
